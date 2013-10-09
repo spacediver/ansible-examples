@@ -1,8 +1,11 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
 
+- name: refresh apt
+  apt: update-cache=yes
+
 - name: Install ntp 
-  yum: name=ntp state=present
+  apt: name=ntp state=present
   tags: ntp
 
 - name: Configure ntp file
@@ -11,5 +14,5 @@
   notify: restart ntp
 
 - name: Start the ntp service
-  service: name=ntpd state=started enabled=true
+  service: name=ntp state=started enabled=true
   tags: ntp
